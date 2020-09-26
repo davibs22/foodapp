@@ -20,16 +20,52 @@ connection.connect(err => {
   }
 })
 
-connection.query(
-  'SELECT * FROM products;',
+/*connection.query(
+  'SHOW TABLES;',
   function(err, results, fields) {
+    console.log(err);
     console.log(results); // results contains rows returned by server
     console.log(fields); // fields contains extra meta data about results, if available
   }
-);
+);*/
+
+/*connection.connect(function(err) {
+  if (err);
+  console.log("Connected!");
+  var sql = "CREATE TABLE products (id int(4) AUTO_INCREMENT))";
+  connection.query(sql, function (err, result) {
+    if (err);
+    console.log("Table created");
+  });
+});*/
+
+/*connection.connect(function(err) {
+  if (err);
+  console.log("Connected!");
+  var sql = "INSERT INTO products (id) VALUES ()";
+  connection.query(sql, function (err, result) {
+    if (err);
+    console.log("1 record inserted");
+  });
+});
+*/
+connection.connect(function(err) {
+  if (err);
+  connection.query("SELECT * FROM heroku_e881adefe6fbcfa.products;", function (err, result, fields) {
+    if (err);
+    console.log(result);
+  });
+});
 
 app.get('/products', (req, res) => {
-    res.status(200).send('Relação dos Produtos')
+    /*res.status(200).send('Relação dos Produtos')*/
+    connection.connect(function(err) {
+      if (err);
+      connection.query("SELECT * FROM heroku_e881adefe6fbcfa.products;", function (err, result, fields) {
+        if (err);
+        res.status(200).send(result);
+      });
+    });
 })
 
 app.listen(port, () => {
