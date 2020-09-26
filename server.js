@@ -10,6 +10,7 @@ const connection = mysql.createConnection({
     password: 'e9b02acd',
     multipleStatements: true
 })
+//teste
 
 app.get('/products', (req, res) => {
     res.status(200).send('Relação dos Produtos')
